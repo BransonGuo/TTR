@@ -206,9 +206,11 @@ function(x, n=10, cumulative=FALSE) {
                      DUP = TRUE )$oa
   }
 
-  # Replace 1:(n-1) with NAs and prepend NAs from original data
-  is.na(result) <- c(1:(n-1))
-  result <- c( rep( NA, NAs ), result )
+  # Replace 1:(n-1) with NAs and keep NAs from original data
+  is.na(result) <- c(1:(n-1 + NAs))
+  #result <- c( rep( NA, NAs ), result ) 
+  #the above code is commented, as it will add extra data entries by "prepending NAs from original data"
+  #in this way, the runMax can then be consistent with the runMin function
 
   # Convert back to original class
   reclass(result, x)
